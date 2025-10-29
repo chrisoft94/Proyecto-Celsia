@@ -24,12 +24,12 @@ jobs:
 
       - name: ⚙️ Instalar dependencias backend
         run: |
-          cd backend
+          cd backend-celsia
           npm install
 
       - name: ⚙️ Instalar dependencias frontend
         run: |
-          cd frontend
+          cd frontend-celsia
           npm install
 
       - name: 🧱 Construir frontend (Vite)
