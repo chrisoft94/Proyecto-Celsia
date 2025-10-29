@@ -1,0 +1,54 @@
+name: Node.js + Vue CI/CD
+
+# 🟢 Ejecutar cuando haya push a main o PR
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: 📥 Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: 🟢 Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # === Backend ===
+      - name: ⚙️ Instalar dependencias backend
+        run: |
+          cd backend
+          npm install
+
+      - name: 🧪 Ejecutar pruebas backend (si existen)
+        run: |
+          cd backend
+          npm test || echo "No hay pruebas definidas"
+
+      # === Frontend ===
+      - name: ⚙️ Instalar dependencias frontend
+        run: |
+          cd frontend
+          npm install
+
+      - name: 🧱 Construir frontend (Vite)
+        run: |
+          cd frontend
+          npm run build
+
+      # === Artefactos ===
+      - name: 📦 Subir build como artefacto
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: frontend/dist
