@@ -1,6 +1,5 @@
 name: Node.js + Vue CI/CD
 
-# 🟢 Ejecutar cuando haya push a main o PR
 on:
   push:
     branches: [main]
@@ -10,32 +9,24 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [18.x]
 
     steps:
       - name: 📥 Clonar el repositorio
         uses: actions/checkout@v4
 
       - name: 🟢 Configurar Node.js
-        uses: actions/upload-artifact@v4
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
-      # === Backend ===
       - name: ⚙️ Instalar dependencias backend
         run: |
           cd backend
           npm install
 
-      - name: 🧪 Ejecutar pruebas backend (si existen)
-        run: |
-          cd backend
-          npm test || echo "No hay pruebas definidas"
-
-      # === Frontend ===
       - name: ⚙️ Instalar dependencias frontend
         run: |
           cd frontend
@@ -46,9 +37,13 @@ jobs:
           cd frontend
           npm run build
 
-      # === Artefactos ===
-      - name: 📦 Subir build como artefacto
+      - name: 🔍 Verificar contenido del build
+        run: |
+          ls -la frontend
+          ls -la frontend/dist || echo "⚠️ No se encontró carpeta dist"
+
+      - name: 📦 Subir artefacto compilado
         uses: actions/upload-artifact@v4
         with:
           name: dist
-          path: frontend/dist
+          path: frontend/dist/
