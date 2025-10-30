@@ -8,4 +8,6 @@ const { Pool } = pkg;
     database: 'db_rcb83hhc3zpj',
     password: '7nlSUXRIu7AVqfBbqrLwLpyX',
     port: 11550,
+    ssl: { rejectUnauthorized: false } // 🔹 importante si tu proveedor usa SSL
   });
+
