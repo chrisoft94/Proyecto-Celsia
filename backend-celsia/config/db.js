@@ -1,10 +1,11 @@
 import pkg from 'pg';
 const { Pool } = pkg;
 
-export const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'herramentales_db',
-  password: '12345678',
-  port: 5432,
-});
+  
+ export const pool = new Pool({
+    user: 'db_rcb83hhc3zpj',
+    host: 'up-de-fra1-postgresql-1.db.run-on-seenode.com',
+    database: 'db_rcb83hhc3zpj',
+    password: '7nlSUXRIu7AVqfBbqrLwLpyX',
+    port: 11550,
+  });

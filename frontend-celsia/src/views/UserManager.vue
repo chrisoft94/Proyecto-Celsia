@@ -74,7 +74,7 @@ const isAdmin = currentUser.value?.rol === 'admin';
 
 const obtenerUsuarios = async () => {
   try {
-    const res = await axios.get('http://localhost:4000/api/users/list');
+    const res = await axios.get('https://web-ddoii8e37giw.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/users/list');
     usuarios.value = res.data;
   } catch (err) {
     console.error(err);
@@ -89,11 +89,11 @@ const guardarUsuario = async () => {
       // Sólo admin puede enviar rol en el body (backend lo valida)
       const body = { nombre: form.value.nombre, correo: form.value.correo };
       if (isAdmin && form.value.rol) body.rol = form.value.rol;
-      await axios.put(`http://localhost:4000/api/users/${form.value.id}`, body);
+      await axios.put(`https://web-ddoii8e37giw.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/users/${form.value.id}`, body);
       alert('Usuario actualizado con éxito');
     } else {
       // Registro público crea user sin rol
-      await axios.post('http://localhost:4000/api/users/register', {
+      await axios.post('https://web-ddoii8e37giw.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/users/register', {
         nombre: form.value.nombre,
         correo: form.value.correo,
         password: form.value.password
@@ -122,7 +122,7 @@ const cancelarEdicion = () => {
 const eliminarUsuario = async (id) => {
   if (!confirm('¿Seguro que deseas eliminar este usuario?')) return;
   try {
-    await axios.delete(`http://localhost:4000/api/users/${id}`);
+    await axios.delete(`https://web-ddoii8e37giw.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/users/${id}`);
     alert('Usuario eliminado con éxito');
     obtenerUsuarios();
   } catch (err) {

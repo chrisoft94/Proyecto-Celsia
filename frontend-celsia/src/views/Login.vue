@@ -22,7 +22,7 @@ export default {
   methods: {
     async login() {
       try {
-        const res = await axios.post('http://localhost:4000/api/auth/login', {
+        const res = await axios.post('https://web-ddoii8e37giw.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/auth/login', {
           correo: this.correo,
           password: this.password
         })
