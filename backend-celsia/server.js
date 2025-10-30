@@ -16,6 +16,11 @@ app.use('/api/auth', authRoutes);
 const usuarios = [];
 const port = process.env.PORT || 80;
 
+
+app.get('/', (req, res) => {
+    res.send('Hello World\nWelcome to Seenode!');
+});
+
 /**
  * @route   POST /api/auth/register
  * @desc    Registrar un nuevo usuario
@@ -53,10 +58,6 @@ app.post('/api/auth/register', async (req, res) => {
   }
 });
 
-
-app.get('/', (req, res) => {
-    res.send('Hello World\nWelcome to Seenode!');
-});
 
 
 app.listen(port, () => {
