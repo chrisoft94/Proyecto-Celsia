@@ -14,6 +14,12 @@ app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 // 🔹 Array temporal para almacenar los usuarios registrados
 const usuarios = [];
+const port = process.env.PORT || 80;
+
+
+app.get('/', (req, res) => {
+    res.send('Hello World\nWelcome to Seenode!');
+});
 
 /**
  * @route   POST /api/auth/register
@@ -54,6 +60,6 @@ app.post('/api/auth/register', async (req, res) => {
 
 
 
-
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
+});
