@@ -55,5 +55,5 @@ app.post('/api/auth/register', async (req, res) => {
 
 
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 80;
 app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));
