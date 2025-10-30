@@ -16,6 +16,16 @@ app.use('/api/auth', authRoutes);
 const usuarios = [];
 const port = process.env.PORT || 80;
 
+// ⚙️ Configuración personalizada
+const corsOptions = {
+  origin: ['http://localhost:8080', 'https://proyecto-celsia.vercel.app/login'], // dominios permitidos
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true // permite envío de cookies/autenticación
+};
+
+app.use(cors(corsOptions));
+
 
 app.get('/', (req, res) => {
     res.send('Hello World\nWelcome to Seenode!');
